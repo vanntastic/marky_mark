@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Easy Mapr Examples : Google Maps V3 API</title>
+    <title>Marky Mark Examples : Google Maps V3 API</title>
     <script src="http://www.google.com/jsapi"></script>
     <script type="text/javascript" charset="utf-8">
       google.load("jquery","1.3.2");
@@ -55,6 +55,11 @@
     </script>
     
     <style type="text/css" media="screen">
+      body{
+        font: 12px "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+        line-height:1.5em;
+      }
+      
       h1{
         font: 20px "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
       }
@@ -70,7 +75,7 @@
     </style>
   </head>
   <body>
-    <h1>Google Maps V3 / Easy Mapr Demo</h1>
+    <h1>Marky Mark Demo</h1>
     <div id="special-house" style="display:none">
       <h1>
         Corcoran Park
@@ -80,6 +85,17 @@
     </div>
     
     <div id="map" style="width:95%;height:400px"></div>
+    
+    <p>Marky Mark is a quick and simple wrapper for <a href="http://code.google.com/apis/maps/documentation/v3/">Google maps V3</a>. I wrote this library for one reason and one reason only&#8230; to simplify the creation of map markers in google maps! It&#8217;s meant to be extremely simple and doesn&#8217;t do advanced things, but it does the following things well:</p>
+
+    <ul>
+    <li>Create single or multiple markers</li>
+    <li>Integrated geocoding without an API key! Hooray!</li>
+    <li>It can be an alternative to integrating maps without going to google maps and getting the iframe maps</li>
+    <li>Dependency free! You can use this with your favorite JS library if you like</li>
+    </ul>
+
+    <p>Remember if you need more advanced features, just drop down into the actual API code, it&#8217;s really not that hard, just gets repetitive sometimes, this small library is meant to alleviate some of the more trivial things like setting <a href="http://code.google.com/apis/maps/documentation/v3/reference.html#Marker">Markers</a> and customizing <a href="http://code.google.com/apis/maps/documentation/v3/reference.html#InfoWindow">Info Windows</a></p>
     
     <h1>Code</h1>
     

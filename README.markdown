@@ -1,9 +1,10 @@
 Marky Mark
 ==========
 
-Marky Mark is a quick and simple wrapper for [Google maps V3](http://code.google.com/apis/maps/documentation/v3/). It's meant to be extremely simple and doesn't do advanced things, but it does the following things well:
+Marky Mark is a quick and simple wrapper for [Google maps V3](http://code.google.com/apis/maps/documentation/v3/). I wrote this library for one reason and one reason only... to simplify the creation of map markers in google maps! It's meant to be extremely simple and doesn't do advanced things, but it does the following things well:
 
   - Create single or multiple markers
+  - it's super easy to attach info windows to markers
   - Integrated geocoding without an API key! Hooray!
   - It can be an alternative to integrating maps without going to google maps and getting the iframe maps
   - Dependency free! You can use this with your favorite JS library if you like
@@ -14,7 +15,7 @@ Installation
 ============
   
     cd into/your/js/directory
-    git clone git@github.com:vanntastic/easy_mapr.git 
+    git clone git@github.com:vanntastic/marky_mark.git 
     
     // Add the following to your page in the head
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -62,4 +63,39 @@ Installation
 Methods
 =======
 
-# Continue here..
+create_map (elem,opts)
+----------------------
+
+Create a map object, this is an abstraction of google.maps.Map.
+
+Options:
+
+    - elem : the id of the element you want to attach the map to
+    - opts : standard map options, you can find them here: [Google Maps Options](http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions)
+
+Example:
+
+     var map_opts = {
+        zoom: 14,
+        center: set_latlng(coordinates.USA.MN),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = create_map("map",map_opts);
+      
+set_latlng ([latlng])
+---------------------
+
+Set latitude and longitude, this is an abstraction of google.maps.LatLng.
+
+Options:
+
+    - latlng : This is the latitude and longitude of a location, this needs to be an array, if you need to get coordinates of any of the US states, there is a coordinates.US hash that you can grab predefined list of US states.
+    
+    
+set_marker (opts)
+-----------------
+
+An all inclusive method to set map markers, this has built in geocoding (with no API key!) with it.
+
+Opts hash options:
+

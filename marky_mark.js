@@ -6,7 +6,7 @@ function create_map (elem,opts) {
   return new google.maps.Map(document.getElementById(elem), opts);
 }
 
-// set_latlng(lat,lng)
+// set_latlng([lat,lng])
 function set_latlng (latlng) {
   return new google.maps.LatLng(latlng[0],latlng[1]);
 }
