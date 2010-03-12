@@ -154,4 +154,6 @@ Example:
       }
       
     ]);
-    
+
+
+Copyright (c) 2010 Vann Ek., released under the MIT license    
