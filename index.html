@@ -3,41 +3,61 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Google Maps V3 : Gmapr</title>
+    <title>Easy Mapr Examples : Google Maps V3 API</title>
+    
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="gmapr.js"></script> 
+    <script type="text/javascript" src="easy_mapr.js"></script> 
     <script type="text/javascript" charset="utf-8">
       function init () {
-        var opts = {
+        // find more map options at : http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions
+        var map_opts = {
           zoom: 12,
-          center: set_latlng([45.0221762, -93.2944366]),
+          // center: set_latlng([45.0221762, -93.2944366]),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
        
-       map = create_map("map",opts);
-       
+       map = create_map("map",map_opts);
+      
        set_markers([
-          { 
-            position: set_latlng([45.024112,-93.2956656]),
-            map: map
-          },
-          {
-            position: set_latlng([45.0221762, -93.2944366]),
-            map: map,
-            icon: "images/aim_16.png"
-          }
+         {
+           address: '1206 N 37th Ave, Minneapolis, MN',
+           map: map
+         },
+         {
+           address: '3535 HUMBOLDT AVE N, Minneapolis, MN',
+           map: map,
+           icon: "images/aim_16.png",
+           info: "#special-house"
+         },
+         {
+           address: '3622 GIRARD AVE N, Minneapolis, MN',
+           map: map,
+           info: "Special House"
+         }
        ]);
        
       }
       
-      window.onload = function(){
-        init();
-      }
+      window.onload = function(){ init(); }
     </script>
+    
+    
+    <style type="text/css" media="screen">
+      h1{
+        font: 20px "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <h1>Google Maps V3</h1>
+    <h1>Google Maps V3 / Easy Mapr Demo</h1>
+    <div id="special-house" style="display:none">
+      <h1>
+        Another Special House
+      </h1>
+      
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
     
     <div id="map" style="width:100%;height:400px"></div>
     
