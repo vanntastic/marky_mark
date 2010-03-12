@@ -4,6 +4,10 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Easy Mapr Examples : Google Maps V3 API</title>
+    <script src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" charset="utf-8">
+      google.load("jquery","1.3.2");
+    </script>
     
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -37,16 +41,31 @@
           }
          
         ]);
-       
+        
       }
       
       window.onload = function(){ init(); }
     </script>
     
+    <script type="text/javascript" charset="utf-8">
+      // you can use any js library you want
+      $(document).ready(function() {
+        $('#map').css('border', '3px solid #000')
+      });
+    </script>
     
     <style type="text/css" media="screen">
       h1{
         font: 20px "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+      }
+      pre{
+        border:1px solid #ccc;
+        background:#000;
+        color:#fff;
+        padding:5px;
+      }
+      #map{
+        margin:10px;
       }
     </style>
   </head>
@@ -60,7 +79,45 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
     
-    <div id="map" style="width:100%;height:400px"></div>
+    <div id="map" style="width:95%;height:400px"></div>
     
+    <h1>Code</h1>
+    
+    <pre>
+      
+   function init () {
+     // find more map options at : http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions
+     var map_opts = {
+       zoom: 15,
+       center: set_latlng(coordinates.USA.MN),
+       mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
+     map = create_map("map",map_opts);
+
+     set_markers([
+       {
+         address: '1206 N 37th Ave, Minneapolis, MN',
+         map: map
+       },
+       {
+         address: '3535 HUMBOLDT AVE N, Minneapolis, MN',
+         map: map,
+         center: true,
+         icon: "images/aim_16.png",
+         info: "#special-house"
+       },
+       {
+         address: '3622 GIRARD AVE N, Minneapolis, MN',
+         map: map,
+         info: "Special House"
+       }
+
+     ]);
+
+   }
+
+   window.onload = function(){ init(); }
+      </pre>       
+      
   </body>
 </html>
