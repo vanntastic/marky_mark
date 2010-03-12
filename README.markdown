@@ -95,7 +95,63 @@ Options:
 set_marker (opts)
 -----------------
 
-An all inclusive method to set map markers, this has built in geocoding (with no API key!) with it.
+An all inclusive method to set map markers, this has built in geocoding (with no API key!) with it. NOTE: addresses that you will pinpoint, will do so only for the first result, remember we're keeping it simple!
 
 Opts hash options:
 
+    - address: The address to set your marker at, this can be an literal address or an actual location like: 'Powderhorn Park, Minneapolis, MN' (required)
+    - map: the map object for which you want to apply the map to (required)
+    - center: true/false pass whether or not you want the map centered on this marker (optional)
+    - icon: the path to an image that you want to set the marker to (optional)
+    - info: the content of the info window you want to set on the marker, this can be an id in the form of '#my-elem-id' or actual html content (optional)
+    
+Example:
+
+      set_marker({
+        address: 'Powderhorn Park, Minneapolis, MN',
+        map: map,
+        center: true,
+        icon: "path/to/my/icon.png",
+        info: 'Powderhorn Park!'
+      });
+    
+set_info_window (info,marker)
+-----------------------------
+
+Sets an info window on a marker. This is usually used in set_marker.
+
+Options:
+
+    - info: the content of the info window, this can be html content or the id of an element.
+    - marker: the marker object where you want to place your info window.
+    
+Example:
+
+      set_info_window({
+        info: "You clicked me!",
+        marker: marker
+      });
+
+set_markers (opts)
+------------------
+
+Sets multiple markers based on a array of marker option hashes. Takes the same options as set_marker options.
+
+Example:
+
+    set_markers([
+      
+      {
+        address: 'Corcoran Park, Minneapolis, MN',
+        map: map,
+        center: center,
+        icon: 'path/to/my/icon.png',
+        info: 'Corcoran Park'
+      },
+      {
+        address: 'Powderhorn Park, Minneapolis, MN',
+        map: map
+      }
+      
+    ]);
+    
