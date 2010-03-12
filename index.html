@@ -12,30 +12,31 @@
       function init () {
         // find more map options at : http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions
         var map_opts = {
-          zoom: 12,
-          // center: set_latlng([45.0221762, -93.2944366]),
+          zoom: 15,
+          center: set_latlng(coordinates.USA.MN),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-       
-       map = create_map("map",map_opts);
+        map = create_map("map",map_opts);
       
-       set_markers([
-         {
-           address: '1206 N 37th Ave, Minneapolis, MN',
-           map: map
-         },
-         {
-           address: '3535 HUMBOLDT AVE N, Minneapolis, MN',
-           map: map,
-           icon: "images/aim_16.png",
-           info: "#special-house"
-         },
-         {
-           address: '3622 GIRARD AVE N, Minneapolis, MN',
-           map: map,
-           info: "Special House"
-         }
-       ]);
+        set_markers([
+          {
+            address: '1206 N 37th Ave, Minneapolis, MN',
+            map: map
+          },
+          {
+            address: '3535 HUMBOLDT AVE N, Minneapolis, MN',
+            map: map,
+            center: true,
+            icon: "images/aim_16.png",
+            info: "#special-house"
+          },
+          {
+            address: '3622 GIRARD AVE N, Minneapolis, MN',
+            map: map,
+            info: "Special House"
+          }
+         
+        ]);
        
       }
       
