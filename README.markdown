@@ -16,7 +16,13 @@ Installation
   
     cd into/your/js/directory
     git clone git@github.com:vanntastic/marky_mark.git 
-    
+
+Example
+=======
+
+From the example page:
+
+
     // Add the following to your page in the head
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript" 
@@ -32,7 +38,8 @@ Installation
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = create_map("map",map_opts);
-
+        
+        // this is the from the example page
         // set multiple markers of the addresses that you need to mark
         set_markers([
            {
