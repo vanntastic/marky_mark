@@ -11,12 +11,12 @@
     
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="easy_mapr.js"></script> 
+    <script type="text/javascript" src="marky_mark.js"></script> 
     <script type="text/javascript" charset="utf-8">
       function init () {
         // find more map options at : http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions
         var map_opts = {
-          zoom: 15,
+          zoom: 14,
           center: set_latlng(coordinates.USA.MN),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -24,20 +24,20 @@
       
         set_markers([
           {
-            address: '1206 N 37th Ave, Minneapolis, MN',
+            address: 'Powderhorn Park, Minneapolis, MN',
             map: map
           },
           {
-            address: '3535 HUMBOLDT AVE N, Minneapolis, MN',
+            address: 'Corcoran Park, Minneapolis, MN',
             map: map,
             center: true,
             icon: "images/aim_16.png",
             info: "#special-house"
           },
           {
-            address: '3622 GIRARD AVE N, Minneapolis, MN',
+            address: 'Sibley Park, Minneapolis, MN',
             map: map,
-            info: "Special House"
+            info: "Sibley Park"
           }
          
         ]);
@@ -73,7 +73,7 @@
     <h1>Google Maps V3 / Easy Mapr Demo</h1>
     <div id="special-house" style="display:none">
       <h1>
-        Another Special House
+        Corcoran Park
       </h1>
       
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -86,37 +86,37 @@
     <pre>
       
    function init () {
-     // find more map options at : http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions
-     var map_opts = {
-       zoom: 15,
-       center: set_latlng(coordinates.USA.MN),
-       mapTypeId: google.maps.MapTypeId.ROADMAP
-     };
-     map = create_map("map",map_opts);
+    // find more map options at : http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions
+    var map_opts = {
+      zoom: 14,
+      center: set_latlng(coordinates.USA.MN),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = create_map("map",map_opts);
 
-     set_markers([
-       {
-         address: '1206 N 37th Ave, Minneapolis, MN',
-         map: map
-       },
-       {
-         address: '3535 HUMBOLDT AVE N, Minneapolis, MN',
-         map: map,
-         center: true,
-         icon: "images/aim_16.png",
-         info: "#special-house"
-       },
-       {
-         address: '3622 GIRARD AVE N, Minneapolis, MN',
-         map: map,
-         info: "Special House"
-       }
+    set_markers([
+      {
+        address: 'Powderhorn Park, Minneapolis, MN',
+        map: map
+      },
+      {
+        address: 'Corcoran Park, Minneapolis, MN',
+        map: map,
+        center: true,
+        icon: "images/aim_16.png",
+        info: "#special-house"
+      },
+      {
+        address: 'Sibley Park, Minneapolis, MN',
+        map: map,
+        info: "Sibley Park"
+      }
 
-     ]);
+    ]);
 
-   }
+  }
 
-   window.onload = function(){ init(); }
+  window.onload = function(){ init(); }
       </pre>       
       
   </body>

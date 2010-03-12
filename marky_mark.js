@@ -21,7 +21,8 @@ function set_latlng (latlng) {
       icon: icon, // optional
       info: content_or_element_id // optional
     })
-
+    
+    NOTE: set_marker will only pinpoint the first address found
 */
 function set_marker (opts) {
   GEOCODER.geocode({'address': opts.address}, function(results, status) {
