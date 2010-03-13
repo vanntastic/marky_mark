@@ -163,4 +163,6 @@ Example:
     ]);
 
 
+I aim to keep this simple, but if my needs change in the future, I will update this library to match those needs. If you feel like you can contribute to it, feel free to fork the code and do what you want with it.
+
 Copyright (c) 2010 Vann Ek., released under the MIT license    
