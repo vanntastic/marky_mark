@@ -1,0 +1,18 @@
+{
+  "locations": [
+   {
+      "address": "Powderhorn Park, Minneapolis, MN",
+      "info": "Remote Request to Powderhorn Park"
+    },
+    {
+      "address": "Corcoran Park, Minneapolis, MN",
+      "center": "true",
+      "icon": "images/aim_16.png",
+      "info": "Remote request for Corcoran"
+    },
+    {
+      "address": "Sibley Park, Minneapolis, MN",
+      "info": "Remote Request for Sibley Park"
+    }
+  ]
+}

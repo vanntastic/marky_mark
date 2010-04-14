@@ -7,7 +7,7 @@ Marky Mark is a quick and simple wrapper for [Google maps V3](http://code.google
   - it's super easy to attach info windows to markers
   - Integrated geocoding without an API key! Hooray!
   - It can be an alternative to integrating maps without going to google maps and getting the iframe maps
-  - Dependency free! You can use this with your favorite JS library if you like
+  - Dependency free! You can use this with your favorite JS library if you like (Unless you want to use set_remote_markers)
   
 Remember if you need more advanced features, just drop down into the actual API code, it's really not that hard, just gets repetitive sometimes, this small library is meant to alleviate some of the more trivial things like setting [Markers](http://code.google.com/apis/maps/documentation/v3/reference.html#Marker) and customizing [Info Windows](http://code.google.com/apis/maps/documentation/v3/reference.html#InfoWindow)
 
@@ -16,6 +16,11 @@ Installation
   
     cd into/your/js/directory
     git clone git@github.com:vanntastic/marky_mark.git 
+    
+Dependencies
+============
+
+You can still use all non ajax functions with this library without any other framework, but if you want to be able to load a json file into your maps then jQuery is required.    
 
 Example
 =======
@@ -161,7 +166,35 @@ Example:
       }
       
     ]);
+    
+set_remote_markers(file,map)    
+----------------------------
 
+Sets markers from a json file, here's an example of how your JSON file should look (it requires a locations key):
+
+    // addresses.json
+    {
+      "locations": [
+       {
+          "address": "Powderhorn Park, Minneapolis, MN",
+          "info": "Remote Request to Powderhorn Park"
+        },
+        {
+          "address": "Corcoran Park, Minneapolis, MN",
+          "center": "true",
+          "icon": "images/aim_16.png",
+          "info": "Remote request for Corcoran"
+        },
+        {
+          "address": "Sibley Park, Minneapolis, MN",
+          "info": "Remote Request for Sibley Park"
+        }
+      ]
+    }
+
+Example:    
+  
+    set_remote_markers('addresses.json',remote_map)
 
 I aim to keep this simple, but if my needs change in the future, I will update this library to match those needs. If you feel like you can contribute to it, feel free to fork the code and do what you want with it.
 

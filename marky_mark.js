@@ -82,7 +82,7 @@ function set_info_window (info,marker) {
 /*
   Set multiple markers
   EX:
-  // pass the same arguments as set_marker hashes
+  // pass the same arguments as an array of set_marker hashes
   set_markers([
     {
       address: '1206 N 37th Ave, Minneapolis, MN',
@@ -100,6 +100,49 @@ function set_info_window (info,marker) {
 function set_markers (opts) {
   for (var i=0; i < opts.length; i++) {
     set_marker(opts[i]);
+  };
+}
+
+/* 
+    
+    Sets markers from a remote location, * NOTE: requires JQuery, it'll return null otherwise
+    EX: 
+    set_remote_markers('addresses.json',remote_map);
+    
+    NOTE: your json file should be in the following format (it must have a locations key):
+    {
+      "locations": [
+       {
+          "address": "Powderhorn Park, Minneapolis, MN",
+          "info": "Remote Request to Powderhorn Park"
+        },
+        {
+          "address": "Corcoran Park, Minneapolis, MN",
+          "center": "true",
+          "icon": "images/aim_16.png",
+          "info": "Remote request for Corcoran"
+        },
+        {
+          "address": "Sibley Park, Minneapolis, MN",
+          "info": "Remote Request for Sibley Park"
+        }
+      ]
+    }
+
+*/
+
+function set_remote_markers (file, map) {
+  if (typeof(jQuery)=="function") {
+    // Setting markers from a remote json file * Requires JQuery
+    json_file = $.getJSON(file, function(data){
+      $.each(data.locations, function(i,location){
+        location.map = map;
+      });
+      set_markers(data.locations);
+    });
+  }else{
+    console.log("You need JQuery to use set_remote_markers.")
+    return null;
   };
 }
 
@@ -175,3 +218,4 @@ var coordinates = {
     WY: [43.0760, -107.2903]
   }
 };
+
