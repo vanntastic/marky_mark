@@ -1,9 +1,17 @@
+// NOTE: make sure that you add the following before including it in your page:
+// <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+// <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
 // GLOBALS
 var GEOCODER = new google.maps.Geocoder();
 
 // create map by id
 function create_map (elem,opts) {
-  return new google.maps.Map(document.getElementById(elem), opts);
+  if (document.getElementById(elem)) {
+    return new google.maps.Map(document.getElementById(elem), opts);
+  }else{
+    console.log("No element with ID: '" + elem + "' available to create map.");
+  };
 }
 
 // set_latlng([lat,lng])
