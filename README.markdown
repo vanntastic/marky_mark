@@ -5,7 +5,7 @@ Marky Mark is a quick and simple wrapper for [Google maps V3](http://code.google
 
   - Create single or multiple markers
   - it's super easy to attach info windows to markers
-  - Integrated geocoding without an API key! Hooray!
+  - Integrated geocoding without an API key! Hooray! **NOTE:** the built in geocoding only allows 11 geocode requests per request, please use an external geocoder if you need to make more requests.
   - It can be an alternative to integrating maps without going to google maps and getting the iframe maps
   - Dependency free! You can use this with your favorite JS library if you like (Unless you want to use set_remote_markers)
   

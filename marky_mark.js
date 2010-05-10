@@ -62,7 +62,8 @@ function set_marker (opts) {
        if (is.defined(info)) { set_info_window(info,marker) };
        
     } else {
-      alert("Could not geocode address: " + opts.address + " because of: " + status);
+      console.log("Could not geocode address: " + opts.address + " because of: " + status);
+      // alert("Could not geocode address: " + opts.address + " because of: " + status);
     };
     
   });
