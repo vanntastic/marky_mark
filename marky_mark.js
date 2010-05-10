@@ -40,7 +40,7 @@ function set_marker (opts) {
     // latlng setup
     marker_opts = {
        map: opts.map,
-       position: opts.latlng
+       position: set_latlng(opts.latlng)
      };
      // set optional defaults right here
      if (is.defined(opts.icon)) { marker_opts.icon = opts.icon };
@@ -64,7 +64,7 @@ function set_marker (opts) {
 
      // center the map if it's set to true
      if (is.defined(opts.center)) {
-       opts.map.setCenter(opts.latlng);
+       opts.map.setCenter(set_latlng(opts.latlng));
        delete opts.center;
      };
 
