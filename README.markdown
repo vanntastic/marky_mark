@@ -8,6 +8,7 @@ Marky Mark is a quick and simple wrapper for [Google maps V3](http://code.google
   - Integrated geocoding without an API key! Hooray!
   - It can be an alternative to integrating maps without going to google maps and getting the iframe maps
   - Dependency free! You can use this with your favorite JS library if you like (Unless you want to use set_remote_markers)
+  - A simple way to create your own map themes!
   
 Remember if you need more advanced features, just drop down into the actual API code, it's really not that hard, just gets repetitive sometimes, this small library is meant to alleviate some of the more trivial things like setting [Markers](http://code.google.com/apis/maps/documentation/v3/reference.html#Marker) and customizing [Info Windows](http://code.google.com/apis/maps/documentation/v3/reference.html#InfoWindow)
 
@@ -83,16 +84,26 @@ Create a map object, this is an abstraction of google.maps.Map.
 Options:
 
     - elem : the id of the element you want to attach the map to
-    - opts : standard map options, you can find them here: [Google Maps Options](http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions)
+    - opts : standard map options, you can find them here: [Google Maps Options](http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions), you can apply a theme by passing the theme attribute, a list of built in themes is listed at the bottom of this readme or the marky_mark source.
 
 Example:
 
+     // no theme
      var map_opts = {
         zoom: 14,
         center: set_latlng(coordinates.USA.MN),
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       map = create_map("map",map_opts);
+      
+      // with a theme
+      var map_opts = {
+        zoom: 14,
+        center: set_latlng(coordinates.USA.MN),
+        theme: themes.dark
+      };
+      map = create_map("map",map_opts);
+      
       
 set_latlng ([latlng])
 ---------------------
@@ -198,4 +209,35 @@ Example:
 
 I aim to keep this simple, but if my needs change in the future, I will update this library to match those needs. If you feel like you can contribute to it, feel free to fork the code and do what you want with it.
 
-Copyright (c) 2010 Vann Ek., released under the MIT license    
+Themes
+======
+
+You can apply various themes to your maps, here's the list of available themes:
+
+  - buildingOutlines
+  - neonGreen
+  - dark
+  - greenOrange
+  - hiliteUrban
+  - inverted
+  - midnight
+  - sepia
+  - grayScale
+  
+You can add your own themes as well, if you haven't already, [do some reading at the google maps api v3 site](http://code.google.com/apis/maps/documentation/javascript/maptypes.html#StyledMaps) about styled maps. Then simply pass in the following hash:
+
+  // the attributes themeName and set are both REQUIRED
+  nameOftheme = {
+    themeName = nameOftheme,
+    set = [{stylesOptions}]
+  }
+  
+  // then apply it the create_map method as so:
+  var map_opts = {
+     zoom: 14,
+     center: set_latlng(coordinates.USA.MN),
+     theme: nameOftheme
+  };
+  map = create_map("map",map_opts);
+  
+Copyright (c) 2010 Vann Ek., released under the MIT license
