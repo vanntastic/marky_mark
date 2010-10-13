@@ -240,4 +240,6 @@ You can add your own themes as well, if you haven't already, [do some reading at
   };
   map = create_map("map",map_opts);
   
+Most themes are based on this article: [http://www.41latitude.com/post/1268734799/google-styled-maps](http://www.41latitude.com/post/1268734799/google-styled-maps)  
+  
 Copyright (c) 2010 Vann Ek., released under the MIT license
