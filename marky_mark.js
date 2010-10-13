@@ -1,3 +1,7 @@
+// NOTE: make sure that you add the following before including it in your page:
+// <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+// <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
 // GLOBALS
 var GEOCODER = new google.maps.Geocoder();
 
@@ -13,13 +17,17 @@ function create_map (elem,opts) {
     var themeStyles = new google.maps.StyledMapType(theme.set, {name: theme.themeName});
     delete opts.theme;
   }
-  var map = new google.maps.Map(document.getElementById(elem), opts);
-  if (themeEnabled == true) {
-    map.mapTypes.set(theme.themeName, themeStyles);
-    map.setMapTypeId(theme.themeName);
-    console.log("Applying theme: " + theme.themeName)
+  if (document.getElementById(elem)) {
+    var map = new google.maps.Map(document.getElementById(elem), opts);
+    if (themeEnabled == true) {
+      map.mapTypes.set(theme.themeName, themeStyles);
+      map.setMapTypeId(theme.themeName);
+      console.log("Applying theme: " + theme.themeName)
+    };
+    return map;
+  }else{
+    console.log("No element with ID: '" + elem + "' available to create map.");
   };
-  return map;
 }
 
 // set_latlng([lat,lng])
@@ -31,55 +39,112 @@ function set_latlng (latlng) {
 // EX:
 /* 
     set_marker({
-      address: '1234 your address', // required
+      address: '1234 your address', // required unless you have latlng set
+      latlng: [lat,lng], // required unless you have address set, this will take precedence if both address and latlng exist
       map: map, // required
       center: true_or_false, // optional
       icon: icon, // optional
       info: content_or_element_id // optional
+      auto_open: true/false // optional 
     })
     
     NOTE: set_marker will only pinpoint the first address found
 */
+
 function set_marker (opts) {
-  GEOCODER.geocode({'address': opts.address}, function(results, status) {
+  if (is.defined(opts.latlng)) {
+    // latlng setup
+    marker_opts = {
+       map: opts.map,
+       position: set_latlng(opts.latlng)
+     };
+     // set optional defaults right here
+     if (is.defined(opts.icon)) { marker_opts.icon = opts.icon };
+     // set the info var for the infowindow
+     /*
+      TODO : the following pattern should be extracted out into a function ...
+     */
+     if (is.defined(opts.info)) {
+       info = opts.info;
+       delete opts.info;
+     } else {
+       info = undefined;
+     };
+
+     if (is.defined(opts.auto_open)) {
+       auto_open = opts.auto_open;
+       delete opts.auto_open;
+     } else {
+       auto_open = false;
+     };
+
+     // center the map if it's set to true
+     if (is.defined(opts.center)) {
+       opts.map.setCenter(set_latlng(opts.latlng));
+       delete opts.center;
+     };
+
+     marker = new google.maps.Marker(marker_opts);
+
+     // set info windows and events
+     if (is.defined(info)) { set_info_window(info,marker,auto_open) };
     
-    if (status == google.maps.GeocoderStatus.OK) {
-       marker_opts = {
-         map: opts.map,
-         position: results[0].geometry.location
-       };
-       // set optional defaults right here
-       if (is.defined(opts.icon)) { marker_opts.icon = opts.icon };
-       // set the info var for the infowindow
-       if (is.defined(opts.info)) {
-         info = opts.info;
-         delete opts.info;
-       } else {
-         info = undefined;
-       };
-       
-       // center the map if it's set to true
-       if (is.defined(opts.center)) {
-         opts.map.setCenter(results[0].geometry.location);
-         delete opts.center;
-       };
-       
-       marker = new google.maps.Marker(marker_opts);
-       
-       // set info windows and events
-       if (is.defined(info)) { set_info_window(info,marker) };
-       
-    } else {
-      alert("Could not geocode address: " + opts.address + " because of: " + status);
-    };
+  } else {
     
-  });
+    GEOCODER.geocode({'address': opts.address}, function(results, status) {
+
+      if (status == google.maps.GeocoderStatus.OK) {
+         marker_opts = {
+           map: opts.map,
+           position: results[0].geometry.location
+         };
+         // set optional defaults right here
+         if (is.defined(opts.icon)) { marker_opts.icon = opts.icon };
+         // set the info var for the infowindow
+         /*
+          TODO : the following pattern should be extracted out into a function ...
+         */
+         if (is.defined(opts.info)) {
+           info = opts.info;
+           delete opts.info;
+         } else {
+           info = undefined;
+         };
+
+         if (is.defined(opts.auto_open)) {
+           auto_open = opts.auto_open;
+           delete opts.auto_open;
+         } else {
+           auto_open = false;
+         };
+
+         // center the map if it's set to true
+         if (is.defined(opts.center)) {
+           opts.map.setCenter(results[0].geometry.location);
+           delete opts.center;
+         };
+
+         marker = new google.maps.Marker(marker_opts);
+
+         // set info windows and events
+         if (is.defined(info)) { set_info_window(info,marker,auto_open) };
+
+      } else {
+        console.log("Could not geocode address: " + opts.address + " because of: " + status);
+        // alert("Could not geocode address: " + opts.address + " because of: " + status);
+      };
+
+    });
+  };
+
 }
 
 // Can either be an id: '#somediv' or actual html content
 // EX: set_info_window('#somediv',marker) # => grabs some div
 //     set_info_window("<div id='cool'>My Map content!</div>",marker)
-function set_info_window (info,marker) {
+// automatically open the info window
+//    set_info_window('My info', marker, true)
+function set_info_window (info,marker,auto_open) {
   // pulls an element's html content
   if (info.charAt(0) == '#') {
     id = info.split('#')[1];
@@ -90,9 +155,14 @@ function set_info_window (info,marker) {
     content: info
   });
   
-  google.maps.event.addListener(marker, 'click', function() {
+  if (auto_open) {
     infowindow.open(marker.map, marker);
-  });
+  }else{
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(marker.map, marker);
+    });
+  };
+
 }
 
 /*

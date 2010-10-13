@@ -5,7 +5,7 @@ Marky Mark is a quick and simple wrapper for [Google maps V3](http://code.google
 
   - Create single or multiple markers
   - it's super easy to attach info windows to markers
-  - Integrated geocoding without an API key! Hooray!
+  - Integrated geocoding without an API key! Hooray! **NOTE:** the built in geocoding only allows 11 geocode requests per request, please use an external geocoder if you need to make more requests.
   - It can be an alternative to integrating maps without going to google maps and getting the iframe maps
   - Dependency free! You can use this with your favorite JS library if you like (Unless you want to use set_remote_markers)
   - A simple way to create your own map themes!
@@ -122,11 +122,13 @@ An all inclusive method to set map markers, this has built in geocoding (with no
 
 Opts hash options:
 
-    - address: The address to set your marker at, this can be an literal address or an actual location like: 'Powderhorn Park, Minneapolis, MN' (required)
+    - address: The address to set your marker at, this can be an literal address or an actual location like: 'Powderhorn Park, Minneapolis, MN' (required unless latlng set)
+    - latlng: [lat,lng] is the lat and lng of the marker, NOTE: this will take precendence over the address if it is set
     - map: the map object for which you want to apply the map to (required)
     - center: true/false pass whether or not you want the map centered on this marker (optional)
     - icon: the path to an image that you want to set the marker to (optional)
     - info: the content of the info window you want to set on the marker, this can be an id in the form of '#my-elem-id' or actual html content (optional)
+    - auto_open: true/false - automatically opens the marker's info window
     
 Example:
 
@@ -138,7 +140,7 @@ Example:
         info: 'Powderhorn Park!'
       });
     
-set_info_window (info,marker)
+set_info_window (info,marker,auto_open)
 -----------------------------
 
 Sets an info window on a marker. This is usually used in set_marker.
@@ -147,6 +149,7 @@ Options:
 
     - info: the content of the info window, this can be html content or the id of an element.
     - marker: the marker object where you want to place your info window.
+    - auto_open: true/false opens the info window on the marker
     
 Example:
 
