@@ -210,41 +210,41 @@ Example:
   
     set_remote_markers('addresses.json',remote_map)
 
+    Themes
+    ======
+
+    You can apply various themes to your maps, here's the list of available themes:
+
+      - buildingOutlines
+      - neonGreen
+      - dark
+      - greenOrange
+      - hiliteUrban
+      - inverted
+      - midnight
+      - sepia
+      - grayScale
+
+    You can add your own themes as well, if you haven't already, [do some reading at the google maps api v3 site](http://code.google.com/apis/maps/documentation/javascript/maptypes.html#StyledMaps) about styled maps. Then simply pass in the following hash:
+
+
+        // the attributes themeName and set are both REQUIRED
+        nameOftheme = {
+          themeName = nameOftheme,
+          set = [{stylesOptions}]
+        }
+
+        // then apply it the create_map method as so:
+        var map_opts = {
+           zoom: 14,
+           center: set_latlng(coordinates.USA.MN),
+           theme: nameOftheme
+        };
+        map = create_map("map",map_opts);
+
+
+    Most themes are based on this article: [http://www.41latitude.com/post/1268734799/google-styled-maps](http://www.41latitude.com/post/1268734799/google-styled-maps)
+
 I aim to keep this simple, but if my needs change in the future, I will update this library to match those needs. If you feel like you can contribute to it, feel free to fork the code and do what you want with it.
 
-Themes
-======
-
-You can apply various themes to your maps, here's the list of available themes:
-
-  - buildingOutlines
-  - neonGreen
-  - dark
-  - greenOrange
-  - hiliteUrban
-  - inverted
-  - midnight
-  - sepia
-  - grayScale
-  
-You can add your own themes as well, if you haven't already, [do some reading at the google maps api v3 site](http://code.google.com/apis/maps/documentation/javascript/maptypes.html#StyledMaps) about styled maps. Then simply pass in the following hash:
-
-
-    // the attributes themeName and set are both REQUIRED
-    nameOftheme = {
-      themeName = nameOftheme,
-      set = [{stylesOptions}]
-    }
-  
-    // then apply it the create_map method as so:
-    var map_opts = {
-       zoom: 14,
-       center: set_latlng(coordinates.USA.MN),
-       theme: nameOftheme
-    };
-    map = create_map("map",map_opts);
-    
-  
-Most themes are based on this article: [http://www.41latitude.com/post/1268734799/google-styled-maps](http://www.41latitude.com/post/1268734799/google-styled-maps)  
-  
 Copyright (c) 2010 Vann Ek., released under the MIT license
