@@ -14,14 +14,22 @@
     <script type="text/javascript" src="marky_mark.js"></script> 
     <script type="text/javascript" charset="utf-8">
       function init () {
+        
         // find more map options at : http://code.google.com/apis/maps/documentation/v3/reference.html#MapOptions
-        var map_opts = {
+        var localMapOpts = {
+          zoom: 14,
+          center: set_latlng(coordinates.USA.MN),
+          theme: themes.buildingOutlines
+        };
+        
+        var remoteMapOpts = {
           zoom: 14,
           center: set_latlng(coordinates.USA.MN),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        map = create_map("map",map_opts);
-        remote_map = create_map("remote_map",map_opts);
+        
+        map = create_map("map",localMapOpts);
+        remote_map = create_map("remote_map",remoteMapOpts);
       
         set_markers([
           {

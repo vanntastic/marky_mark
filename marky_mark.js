@@ -3,7 +3,23 @@ var GEOCODER = new google.maps.Geocoder();
 
 // create map by id
 function create_map (elem,opts) {
-  return new google.maps.Map(document.getElementById(elem), opts);
+  // support for themes
+  if (is.defined(opts.theme)) {
+    var theme = opts.theme;
+    opts.mapTypeControlOptions = {
+      mapTypeIds: [opts.mapTypeId, theme.themName]
+    }
+    var themeEnabled = true;
+    var themeStyles = new google.maps.StyledMapType(theme.set, {name: theme.themeName});
+    delete opts.theme;
+  }
+  var map = new google.maps.Map(document.getElementById(elem), opts);
+  if (themeEnabled == true) {
+    map.mapTypes.set(theme.themeName, themeStyles);
+    map.setMapTypeId(theme.themeName);
+    console.log("Applying theme: " + theme.themeName)
+  };
+  return map;
 }
 
 // set_latlng([lat,lng])
@@ -217,5 +233,374 @@ var coordinates = {
     WV: [38.5976, -80.4549],
     WY: [43.0760, -107.2903]
   }
+};
+
+// most themes borrowed from: http://www.41latitude.com/post/1268734799/google-styled-maps
+// Find out how to create your own map themes / styles at : http://code.google.com/apis/maps/documentation/javascript/maptypes.html
+
+var themes = {
+  buildingOutlines: 
+    {
+      themeName: "buildingOutlines",
+      set: [{
+        featureType: "administrative",
+        elementType: "all",
+        stylers: [
+          { visibility: "off" }
+        ]
+      },{
+        featureType: "landscape.natural",
+        elementType: "all",
+        stylers: [
+          { visibility: "off" }
+        ]
+      },{
+        featureType: "poi",
+        elementType: "all",
+        stylers: [
+          { visibility: "off" }
+        ]
+      },{
+        featureType: "road",
+        elementType: "all",
+        stylers: [
+          { visibility: "off" }
+        ]
+      },{
+        featureType: "transit",
+        elementType: "all",
+        stylers: [
+          { visibility: "off" }
+        ]
+      },{
+        featureType: "water",
+        elementType: "labels",
+        stylers: [
+          { visibility: "off" }
+        ]
+      }]
+    },
+  neonGreen:
+    {
+      themeName: "neonGreen",
+      set: [
+          {
+            featureType: "road.local",
+            elementType: "geometry",
+            stylers: [
+              { hue: "#00ff00" },
+              { saturation:100 }
+            ]
+          },
+          {
+            featureType: "landscape",
+            elementType: "geometry",
+            stylers: [
+              { lightness: -100 }
+            ]
+          }
+        ]
+    },
+  dark:
+    {
+      themeName: "dark",
+      set: [
+        {
+          featureType: "all",
+          elementType: "all",
+          stylers: [
+            { invert_lightness: true }
+          ]
+        },{
+          featureType: "administrative",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "landscape",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "poi",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "road",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "transit",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "water",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [
+            { lightness: 50 }
+          ]
+        }
+      ]
+    },
+  greenOrange:
+    {
+      themeName: "greenOrange",
+      set: [
+        {
+          featureType: "administrative",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "poi",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "road",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "transit",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "water",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "landscape",
+          elementType: "all",
+          stylers: [
+            { saturation: 100 },
+            { lightness: -50 },
+            { hue: "#1aff00" },
+            { gamma: 0.5 }
+          ]
+        }
+      ]
+    },
+  hiliteUrban:
+    {
+      themeName: "hiliteUrban",
+      set: [
+        {
+          featureType: "road",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "landscape.man_made",
+          elementType: "all",
+          stylers: [
+            { hue: "#ffe500" },
+            { gamma: 0.4 },
+            { lightness: -40 },
+            { saturation: 100 }
+          ]
+        }
+      ]
+    },
+  inverted:
+    {
+      themeName: "inverted",
+      set: [
+        {
+          featureType: "all",
+          elementType: "all",
+          stylers: [
+            { invert_lightness: true }
+          ]
+        },{
+          featureType: "road",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        }
+      ]
+    },
+  midnight:
+    {
+      themeName: "midnight",
+      set: [
+        {
+          featureType: "all",
+          elementType: "all",
+          stylers: [
+            { invert_lightness: true }
+          ]
+        },{
+          featureType: "road",
+          elementType: "all",
+          stylers: [
+            { hue: "#0800ff" }
+          ]
+        },{
+          featureType: "poi",
+          elementType: "all",
+          stylers: [
+            { hue: "#1900ff" }
+          ]
+        },{
+          featureType: "water",
+          elementType: "all",
+          stylers: [
+            { hue: "#0008ff" }
+          ]
+        }
+      ]
+    },
+  sepia:
+    {
+      themeName: "sepia",
+      set: [
+        {
+          featureType: "landscape",
+          elementType: "all",
+          stylers: [
+            { hue: "#ffa200" },
+            { lightness: -20 }
+          ]
+        },{
+          featureType: "water",
+          elementType: "all",
+          stylers: [
+            { hue: "#ff9100" },
+            { lightness: 52 }
+          ]
+        },{
+          featureType: "administrative",
+          elementType: "labels",
+          stylers: [
+            { hue: "#1100ff" },
+            { saturation: -100 },
+            { lightness: -18 }
+          ]
+        },{
+          featureType: "poi",
+          elementType: "all",
+          stylers: [
+            { lightness: -18 },
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "landscape",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "water",
+          elementType: "labels",
+          stylers: [
+            { lightness: -18 },
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "road",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },{
+          featureType: "administrative",
+          elementType: "geometry",
+          stylers: [
+            { visibility: "simplified" }
+          ]
+        },{
+          featureType: "road.highway",
+          elementType: "geometry",
+          stylers: [
+            { saturation: -100 }
+          ]
+        },{
+          featureType: "road.arterial",
+          elementType: "geometry",
+          stylers: [
+            { saturation: -100 }
+          ]
+        },{
+          featureType: "road.local",
+          elementType: "geometry",
+          stylers: [
+            { lightness: -27 }
+          ]
+        },{
+          featureType: "transit",
+          elementType: "all",
+          stylers: [
+            { visibility: "off" }
+          ]
+        }
+      ]
+    },
+  grayScale:
+    {
+      themeName: "grayScale",
+      set: [
+        {
+          featureType: "administrative",
+          elementType: "all",
+          stylers: [
+            { saturation: -100 }
+          ]
+        },{
+          featureType: "landscape",
+          elementType: "all",
+          stylers: [
+            { saturation: -100 }
+          ]
+        },{
+          featureType: "poi",
+          elementType: "all",
+          stylers: [
+            { saturation: -100 }
+          ]
+        },{
+          featureType: "road",
+          elementType: "all",
+          stylers: [
+            { saturation: -100 }
+          ]
+        },{
+          featureType: "transit",
+          elementType: "all",
+          stylers: [
+            { saturation: -100 }
+          ]
+        },{
+          featureType: "water",
+          elementType: "all",
+          stylers: [
+            { saturation: -100 }
+          ]
+        }
+      ]    
+    }
 };
 
